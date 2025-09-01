@@ -1,5 +1,11 @@
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+
 def main():
-    print("Hello from develop-ai-agents-with-langchain-and-langgraph!")
+    print(os.environ.get("OPENAI_API_KEY"))
 
 
 if __name__ == "__main__":
