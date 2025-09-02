@@ -1,11 +1,12 @@
-from dotenv import load_dotenv
 import os
 
+from dotenv import load_dotenv
 from langchain_core.prompts import PromptTemplate
-from langchain_openai import ChatOpenAI
 from langchain_ollama import ChatOllama
+from langchain_openai import ChatOpenAI
 
 load_dotenv()
+
 
 def main():
     print("Hello AI world!")
@@ -33,22 +34,24 @@ def main():
     Elon was an enthusiastic reader of books, and had attributed his success in part to having read The Lord of the Rings, the Foundation series, and The Hitchhiker's Guide to the Galaxy.[11][35] At age ten, he developed an interest in computing and video games, teaching himself how to program from the VIC-20 user manual.[36] At age twelve, Elon sold his BASIC-based game Blastar to PC and Office Technology magazine for approximately $500.[37][38]
     """
 
-
     summary_template = """
     given the information {information} about a person I want you to create:
     1- A short summary
     2- two interesting facts about them
     """
 
-    prompt_template = PromptTemplate(input_variables=["information"], template=summary_template)
+    prompt_template = PromptTemplate(
+        input_variables=["information"], template=summary_template
+    )
     llm = ChatOpenAI(temperature=0, model="gpt-5")
     # llm = ChatOllama(temperature=0, model="gemma3:latest")
 
     chain = prompt_template | llm
 
-    response = chain.invoke(input={"information" : information})
+    response = chain.invoke(input={"information": information})
 
     print(response.content)
+
 
 if __name__ == "__main__":
     main()
